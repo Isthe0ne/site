@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, redirect, url_for, request
 
 app = Flask(__name__)
 
@@ -8,11 +8,17 @@ def index():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-	return redirect(url_for('phished'))
+    try:
+        # Redirigez vers la page 'phished'
+        return redirect(url_for('phished'))
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return "An error occurred", 500
 
 @app.route('/phished')
 def phished():
-	return render_template('phished.html')
+    return render_template('phished.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
+
