@@ -6,7 +6,7 @@ app = Flask(__name__)
 def index():
     return render_template('formulaire.html')
 
-@app.route('/submit')
+@app.route('/submit', methods=['POST'])
 def submit():
 	return redirect(url_for('phished'))
 
